@@ -9,14 +9,83 @@ namespace console_TARpv20_1
 {
     class Program
     {
-        private static int c;
-
+        public void svobodnie_bileti(string[] args)
+        {
+            int[,] bumbers = new int[4, 7];
+        }
         static void Main(string[] args)
         {
-            int m = Convert.ToInt32(Console.ReadLine());
+            ConsoleKeyInfo nupp = new ConsoleKeyInfo();
+            int[,] bumbers = new int[4, 7];
+            for (int i = 0; i < bumbers.GetLength(0); i++)
+            {
+                for (int j = 0; j < bumbers.GetLength(1); j++)
+                {
+                    bumbers[i, j] = 0;
+                    Console.Write(bumbers[i, j]);
+                }
+                Console.WriteLine();
+            }
+            do
+            {
+                Console.Write("Vali rida:");
+                int rida = Convert.ToInt32(Console.ReadLine());
+                Console.Write("vali koht");
+                int koht = Convert.ToInt32(Console.ReadLine());
+                if (bumbers[rida, koht] == 0)
+                {
+                    Console.WriteLine("Koht on vaba!");
+                    bumbers[rida, koht] = 1;
+                    for (int i = bumbers.GetLength(0) - 1; i >= 0; i--)
+                    {
+                        for (int j = 0; j < bumbers.GetLength(0); j++)
+                        {
+                            Console.Write(bumbers[i, j]);
+                        }
+                        Console.WriteLine();
+                    }
+                }
+                nupp = Console.ReadKey();
+            } while (nupp.Key != ConsoleKey.Escape);
+
+            string[] texts = new string[4];
+            for (int i = 0; i < texts.GetLength(0); i++)
+            {
+                Console.WriteLine("{0}-text", i.ToString());
+                texts[i] = Console.ReadLine();
+            }
+            foreach (int item in texts)
+            {
+                Console.Write(item + " ");
+            }
+
+
+            int[] numbers = new int[5] { 1, 2, 3, 4, 5 };//Создание списка в котором будет добавлено отдельное количество цифр
+            Console.WriteLine(numbers[1]);
+            foreach (int item in numbers)//Цикл foreach служит для циклического обращения к элементам коллекции, представляющей собой группу объектов.
+            {
+                Console.Write(item + " ");
+            }
+            //Пример с циклом for
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                ;
+            }
+
+            {
+                int i = 0;
+                Console.Write(numbers[i] + "_");
+
+            }
+
+
+
+
+
+            int a_ = Convert.ToInt32(Console.ReadLine());
             int b = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("a={0},b={1}", m, b);
-            double c = (2 * m) + (b / (11 * m)) - (13 * b);
+            Console.WriteLine("a_={0},b={1}", a_, b);
+            double c = (2 * a_ + b) / (11 * a_ - 13 * b);
             Console.WriteLine("c={0}", c.ToString());
 
             Random rnd = new Random();
@@ -25,10 +94,10 @@ namespace console_TARpv20_1
             Console.ReadLine();
 
 
-            string tekst="?";
+            string tekst = "?";
             switch (hinne)
             {
-                case 1:tekst = "Õpi veel!";break;
+                case 1: tekst = "Õpi veel!"; break;
                 case 2: tekst = "Õpi natuke veel!"; break;
                 case 3: tekst = "Rahuldav!"; break;
                 case 4: tekst = "Hea!"; break;
@@ -41,7 +110,6 @@ namespace console_TARpv20_1
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
             Console.WriteLine(tekst);
-            ConsoleKeyInfo nupp = new ConsoleKeyInfo();
             do
             {
                 Console.WriteLine("Click button,Meshok");
@@ -54,10 +122,9 @@ namespace console_TARpv20_1
             string a;
             Console.WriteLine("Q-on vaja salvestada failisse");
             Console.WriteLine("N-on vaja lugeda failist");
-            Console.WriteLine("E-Math");
             Console.WriteLine("F-Info about you");
             nupp = Console.ReadKey();
-            if (nupp.Key==ConsoleKey.Q)
+            if (nupp.Key == ConsoleKey.Q)
             {
                 StreamWriter file = new StreamWriter(@"..\..\texsts.txt", true);
                 file.WriteLine(hinne + " " + tekst);
@@ -65,7 +132,7 @@ namespace console_TARpv20_1
                 a = hinne + " " + tekst;
                 Console.WriteLine("Failisse oli salvestatud: {0}", a);
             }
-            else if(nupp.Key==ConsoleKey.N)
+            else if (nupp.Key == ConsoleKey.N)
             {
                 Console.WriteLine("Failis on järgmine informatsion:");
                 StreamReader failist = new StreamReader(@"..\..\texsts.txt");
